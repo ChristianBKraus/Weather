@@ -14,9 +14,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import jupiterpa.weather.controller.WeatherController;
 import jupiterpa.weather.service.WeatherClient;
 import jupiterpa.weather.service.WeatherClientMock;
@@ -130,9 +127,6 @@ public class WeatherControllerTest {
         .andExpect(content().contentType(APPLICATION_JSON_UTF8))
         .andExpect(jsonPath("$.temperature").value(4.91))
         .andExpect(jsonPath("$.raining").value(true));
-    }
-   private String toJson(Object object) throws JsonProcessingException {
-        return new ObjectMapper().writeValueAsString(object);
     }
     
 }

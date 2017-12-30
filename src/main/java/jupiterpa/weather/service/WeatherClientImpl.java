@@ -19,6 +19,7 @@ public class WeatherClientImpl implements WeatherClient {
 		RestTemplate template = new RestTemplate();
 		String result = 
 			template.getForObject("http://api.openweathermap.org/data/2.5/forecast?q=Mannheim,de&appid=87256645a845911683bca32ee3331851", String.class);
+		logger.info(TECHNICAL, "Result of Query; {}", result);
 		return result;
 	}
 
