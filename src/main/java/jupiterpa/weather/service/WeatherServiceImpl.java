@@ -21,7 +21,7 @@ public class WeatherServiceImpl implements WeatherService {
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired WeatherClient client;
-	Double temperature = 24.0;
+	Double temperature = -300.0;
 	Boolean raining = false;
 		
 	public WeatherServiceImpl() {
