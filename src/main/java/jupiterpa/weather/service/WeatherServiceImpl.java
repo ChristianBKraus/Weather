@@ -16,7 +16,6 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import jupiterpa.weather.model.Weather;
 
 @Component
-//@Profile("default")
 public class WeatherServiceImpl implements WeatherService {
 	
     private static final Marker TECHNICAL = MarkerFactory.getMarker("TECHNICAL");
@@ -40,8 +39,14 @@ public class WeatherServiceImpl implements WeatherService {
 		double sum_temp = 0.0;
 		double sum_rain = 0.0;
 		int today = 0;
+		
+		logger.info(TECHNICAL,"Initialize Weather");
 
 		String result = client.read();
+		if (result == "") {
+			// keep old value [potentiall dummy ones]
+			return;
+		}
 		
 		try {		
 		    // Extract info

@@ -28,4 +28,8 @@ public class Weather {
 		this.raining = raining;
 	}
 	
+	@Override
+	public String toString() {
+		return "Weather: Temperature="+temperature + " Raining=" + raining; 
+	}
 }

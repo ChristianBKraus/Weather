@@ -18,6 +18,7 @@ public class WeatherClientMock implements WeatherClient {
 	}
 
 	public String read() {
+		System.out.println("Mock");
 		return result;
 	}
 

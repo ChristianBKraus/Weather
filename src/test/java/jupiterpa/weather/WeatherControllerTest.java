@@ -17,6 +17,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import jupiterpa.weather.controller.WeatherController;
 import jupiterpa.weather.service.WeatherClient;
 import jupiterpa.weather.service.WeatherClientMock;
+import jupiterpa.weather.service.WeatherServiceImpl;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -29,9 +30,12 @@ public class WeatherControllerTest {
     private MockMvc mockMvc;
 	@Autowired
 	private WeatherClient client;
+	@Autowired
+	private WeatherServiceImpl service;
     
     @Test
     public void getDefaultWeather() throws Exception {
+    	service.initialize();
     	mockMvc.perform(get(PATH))
         .andExpect(status().isOk())
         .andExpect(content().contentType(APPLICATION_JSON_UTF8))
@@ -49,6 +53,7 @@ public class WeatherControllerTest {
     	
         WeatherClientMock mock = (WeatherClientMock) client;
         mock.inject(result);
+    	service.initialize();
     	
     	mockMvc.perform(get(PATH))
         .andExpect(status().isOk())
@@ -68,6 +73,7 @@ public class WeatherControllerTest {
     	
         WeatherClientMock mock = (WeatherClientMock) client;
         mock.inject(result);
+    	service.initialize();
     	
     	mockMvc.perform(get(PATH))
         .andExpect(status().isOk())
@@ -92,6 +98,7 @@ public class WeatherControllerTest {
     	
         WeatherClientMock mock = (WeatherClientMock) client;
         mock.inject(result);
+    	service.initialize();
     	
     	mockMvc.perform(get(PATH))
         .andExpect(status().isOk())
@@ -121,6 +128,7 @@ public class WeatherControllerTest {
     	
         WeatherClientMock mock = (WeatherClientMock) client;
         mock.inject(result);
+    	service.initialize();
     	
     	mockMvc.perform(get(PATH))
         .andExpect(status().isOk())
