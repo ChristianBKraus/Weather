@@ -13,6 +13,8 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 
+import jupiterpa.weather.model.Weather;
+
 @Component
 //@Profile("default")
 public class WeatherServiceImpl implements WeatherService {
@@ -21,21 +23,15 @@ public class WeatherServiceImpl implements WeatherService {
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired WeatherClient client;
-	Double temperature = -300.0;
-	Boolean raining = false;
+	Weather weather = new Weather(-300.0,false);
 		
 	public WeatherServiceImpl() {
 	}
 	
 	@Override
-	public Double getTemperature() {
-		return temperature;
+	public Weather getWeather() {
+		return weather;
 	}
-
-	@Override
-	public Boolean isRaining() {
-		return raining;
-	}  
 	
 	@Override
 	public void initialize() {
@@ -75,11 +71,11 @@ public class WeatherServiceImpl implements WeatherService {
 			
 			if (number > 0) {
 				if ( sum_rain / (double) number > 0.2)
-					raining = true;
-				temperature = Math.round( ( sum_temp / (double) number - 273.15 )* 100.0 ) / 100.0;
+					weather.setRaining(true);
+				weather.setTemperature( Math.round( ( sum_temp / (double) number - 273.15 )* 100.0 ) / 100.0 );
 			} else {
-				raining = false;
-				temperature = 0.0;
+				weather.setRaining(false);
+				weather.setTemperature(0.0);
 			}
 			
 		} catch (JsonProcessingException e) {

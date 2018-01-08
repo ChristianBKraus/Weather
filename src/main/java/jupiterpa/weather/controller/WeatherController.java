@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import jupiterpa.weather.model.Weather;
 import jupiterpa.weather.service.WeatherService;
 
 
@@ -23,13 +24,13 @@ public class WeatherController {
     WeatherService service;
     
     @GetMapping("")
-    public WeatherDTO get() {
+    public Weather get() {
     	logger.info(TECHNICAL,"Service: {}", service);
     	service.initialize();
-    	logger.info(TECHNICAL,"Temperature: {}", service.getTemperature());
-    	logger.info(TECHNICAL,"Raining: {}", service.isRaining());
-    	WeatherDTO dto = new WeatherDTO(service.getTemperature(),service.isRaining());
-    	return dto;
+    	Weather weather = service.getWeather();
+    	logger.info(TECHNICAL,"Temperature: {}", weather.getTemperature());
+    	logger.info(TECHNICAL,"Raining: {}", weather.isRaining());
+    	return weather;
     }
 
 }

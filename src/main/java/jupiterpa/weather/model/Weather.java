@@ -1,13 +1,13 @@
-package jupiterpa.weather.controller;
+package jupiterpa.weather.model;
 
-public class WeatherDTO {
+public class Weather {
 	Double temperature;
 	boolean raining;
 	
-	public WeatherDTO() {
+	public Weather() {
 		
 	}
-	public WeatherDTO(Double temp, boolean raining) {
+	public Weather(Double temp, boolean raining) {
 		this.temperature = temp;
 		this.raining = raining;
 	}
