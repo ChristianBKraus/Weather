@@ -1,4 +1,4 @@
-package jupiterpa.weather;
+package jupiterpa;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -15,17 +15,18 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
+import jupiterpa.client.ClientMocking;
 import jupiterpa.client.WeatherClient;
-import jupiterpa.controller.WeatherController;
+import jupiterpa.client.WeatherClientMock;
+import jupiterpa.controller.Controller;
 import jupiterpa.service.WeatherServiceImpl;
-import jupiterpa.weather.service.WeatherClientMock;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
 @ActiveProfiles({"mock","test"})
 public class WeatherControllerTest { 
-	final String PATH = WeatherController.PATH; 
+	final String PATH = Controller.PATH; 
 
 	@Autowired
     private MockMvc mockMvc;
@@ -52,7 +53,7 @@ public class WeatherControllerTest {
     			+ "\"main\": { \"temp\": 277.06 }"
     			+ "} ] }";
     	
-        WeatherClientMock mock = (WeatherClientMock) client;
+        ClientMocking mock = (ClientMocking) client;
         mock.inject(result);
     	service.initialize();
     	
@@ -72,7 +73,7 @@ public class WeatherControllerTest {
     			+ "\"main\": { \"temp\": 277.06 }"
     			+ "} ] }";
     	
-        WeatherClientMock mock = (WeatherClientMock) client;
+        ClientMocking mock = (ClientMocking) client;
         mock.inject(result);
     	service.initialize();
     	
@@ -97,7 +98,7 @@ public class WeatherControllerTest {
     			+ "} "
     			+ "] }";
     	
-        WeatherClientMock mock = (WeatherClientMock) client;
+        ClientMocking mock = (ClientMocking) client;
         mock.inject(result);
     	service.initialize();
     	
@@ -127,7 +128,7 @@ public class WeatherControllerTest {
     			+ "} "
     			+ "] }";
     	
-        WeatherClientMock mock = (WeatherClientMock) client;
+        ClientMocking mock = (ClientMocking) client;
         mock.inject(result);
     	service.initialize();
     	

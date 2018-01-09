@@ -1,4 +1,4 @@
-package jupiterpa.controller;
+package jupiterpa.client;
 
 import java.util.Arrays;
 
@@ -13,20 +13,24 @@ import org.springframework.stereotype.Component;
 
 @Aspect
 @Component
-public class WeatherAOP
+public class ClientMockAOP
 {
 	
     private static final Marker TECHNICAL = MarkerFactory.getMarker("TECHNICAL");
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
-	@Around("execution(* jupiterpa.controller.*.*(..))")
+	@Around("execution(* jupiterpa.client.*ClientMock.*(..))")
 	public Object log(ProceedingJoinPoint joinPoint) throws Throwable {
 
-        logger.info(TECHNICAL, " {} ({})", joinPoint.getSignature().toString(),  Arrays.toString(joinPoint.getArgs()));
+        logger.info(TECHNICAL, " Client {} ({})", joinPoint.getSignature().toString(),  Arrays.toString(joinPoint.getArgs()));
 
 		try {
 			Object result = joinPoint.proceed();
-			logger.info(TECHNICAL, " -> Result: {}", result.toString());
+			if ( result != null ) {
+				logger.info(TECHNICAL, " -> Result: {}", result.toString());
+			} else {
+				logger.info(TECHNICAL, " -> Done");
+			}
 			return result;
 		} catch (Throwable e) {
 			logger.error(TECHNICAL, "  => " + e ); 

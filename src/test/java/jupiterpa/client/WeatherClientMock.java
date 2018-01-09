@@ -1,4 +1,4 @@
-package jupiterpa.weather.service;
+package jupiterpa.client;
 
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
@@ -7,7 +7,7 @@ import jupiterpa.client.WeatherClient;
 
 @Component
 @Profile("mock")
-public class WeatherClientMock implements WeatherClient {
+public class WeatherClientMock implements WeatherClient, ClientMocking {
 	
 	String result = "{ \"list\": [ "
 			+ "{ "
@@ -15,8 +15,8 @@ public class WeatherClientMock implements WeatherClient {
 			+ "\"rain\": { \"3h\": 0.16 }, "
 			+ "\"main\": { \"temp\": 277.06 }"
 			+ "} ] }";
-	public void inject(String result) {
-		this.result = result;
+	public void inject(Object result) {
+		this.result = (String) result;
 	}
 
 	public String read() {

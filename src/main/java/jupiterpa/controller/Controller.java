@@ -9,9 +9,9 @@ import jupiterpa.model.Weather;
 import jupiterpa.service.WeatherService;
 
 
-@RequestMapping(path = WeatherController.PATH)
+@RequestMapping(path = Controller.PATH)
 @RestController
-public class WeatherController {
+public class Controller {
     public static final String PATH ="/weather";
     
     @Autowired

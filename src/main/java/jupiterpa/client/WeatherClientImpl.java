@@ -30,8 +30,6 @@ public class WeatherClientImpl implements WeatherClient {
 		String result = 
 			template.getForObject(uri, String.class);
 		
-		logger.info(TECHNICAL, "Result of Query: {}", result);
-		
 		return result;
 	}
 	
