@@ -38,7 +38,7 @@ public class WeatherClientImpl implements WeatherClient {
 	public String defaultRead() {
 		String result = "";
 		
-		logger.warn(TECHNICAL, "GET Whether failed");
+		logger.warn(TECHNICAL, "GET Weather failed");
 		
 //		result = "{ \"list\": [ "
 //				+ "{ "
