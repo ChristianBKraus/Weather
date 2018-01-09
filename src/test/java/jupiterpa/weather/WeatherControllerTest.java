@@ -14,10 +14,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import jupiterpa.weather.controller.WeatherController;
-import jupiterpa.weather.service.WeatherClient;
+
+import jupiterpa.client.WeatherClient;
+import jupiterpa.controller.WeatherController;
+import jupiterpa.service.WeatherServiceImpl;
 import jupiterpa.weather.service.WeatherClientMock;
-import jupiterpa.weather.service.WeatherServiceImpl;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest

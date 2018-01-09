@@ -1,4 +1,4 @@
-package jupiterpa.weather;
+package jupiterpa;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
-import jupiterpa.weather.service.WeatherService;
+import jupiterpa.service.WeatherService;
 
 @EnableCircuitBreaker
 @EnableScheduling

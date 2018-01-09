@@ -1,6 +1,6 @@
-package jupiterpa.weather.service;
+package jupiterpa.service;
 
-import jupiterpa.weather.model.Weather;
+import jupiterpa.model.Weather;
 
 public interface WeatherService {
 	public void initialize();

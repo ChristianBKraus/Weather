@@ -1,12 +1,12 @@
-package jupiterpa.weather.controller;
+package jupiterpa.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import jupiterpa.weather.model.Weather;
-import jupiterpa.weather.service.WeatherService;
+import jupiterpa.model.Weather;
+import jupiterpa.service.WeatherService;
 
 
 @RequestMapping(path = WeatherController.PATH)

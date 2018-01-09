@@ -1,4 +1,4 @@
-package jupiterpa.weather.controller;
+package jupiterpa.controller;
 
 import java.util.Arrays;
 
@@ -19,7 +19,7 @@ public class WeatherAOP
     private static final Marker TECHNICAL = MarkerFactory.getMarker("TECHNICAL");
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
-	@Around("execution(* jupiterpa.weather.controller.WeatherController.*(..))")
+	@Around("execution(* jupiterpa.controller.*.*(..))")
 	public Object log(ProceedingJoinPoint joinPoint) throws Throwable {
 
         logger.info(TECHNICAL, " {} ({})", joinPoint.getSignature().toString(),  Arrays.toString(joinPoint.getArgs()));

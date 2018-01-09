@@ -1,4 +1,4 @@
-package jupiterpa.weather.service;
+package jupiterpa.service;
 
 import java.io.IOException;
 import java.util.Iterator;
@@ -13,7 +13,8 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 
-import jupiterpa.weather.model.Weather;
+import jupiterpa.client.WeatherClient;
+import jupiterpa.model.Weather;
 
 @Component
 public class WeatherServiceImpl implements WeatherService {

@@ -1,4 +1,4 @@
-package jupiterpa.weather.model;
+package jupiterpa.model;
 
 public class Weather {
 	Double temperature;

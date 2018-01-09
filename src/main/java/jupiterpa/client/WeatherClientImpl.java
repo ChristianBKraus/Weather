@@ -1,4 +1,4 @@
-package jupiterpa.weather.service;
+package jupiterpa.client;
 
 import java.net.URI;
 

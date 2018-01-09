@@ -3,6 +3,8 @@ package jupiterpa.weather.service;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
+import jupiterpa.client.WeatherClient;
+
 @Component
 @Profile("mock")
 public class WeatherClientMock implements WeatherClient {
