@@ -1,25 +1,33 @@
 package jupiterpa.model;
 
 public class Weather {
-	Double temperature;
+	
+	Double minTemperature;
+	Double maxTemperature;
 	boolean raining;
 	
 	public Weather() {
 		
 	}
-	public Weather(Double temp, boolean raining) {
-		this.temperature = temp;
+	public Weather(Double temp_min, Double temp_max, boolean raining) {
+		this.minTemperature = temp_min;
+		this.maxTemperature = temp_max;
 		this.raining = raining;
 	}
+	
 
-	public Double getTemperature() {
-		return temperature;
+	public Double getMinTemperature() {
+		return minTemperature;
 	}
-
-	public void setTemperature(Double temperature) {
-		this.temperature = temperature;
+	public void setMinTemperature(Double minTemperature) {
+		this.minTemperature = minTemperature;
 	}
-
+	public Double getMaxTemperature() {
+		return maxTemperature;
+	}
+	public void setMaxTemperature(Double maxTemperature) {
+		this.maxTemperature = maxTemperature;
+	}
 	public boolean isRaining() {
 		return raining;
 	}
@@ -30,6 +38,6 @@ public class Weather {
 	
 	@Override
 	public String toString() {
-		return "Weather: Temperature="+temperature + " Raining=" + raining; 
+		return "Weather: Temperature=" + minTemperature + " - " + maxTemperature + " Raining=" + raining; 
 	}
 }

@@ -23,7 +23,7 @@ public class WeatherServiceImpl implements WeatherService {
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired WeatherClient client;
-	Weather weather = new Weather(-300.0,false);
+	Weather weather = new Weather(-300.0,-300.0,false);
 		
 	public WeatherServiceImpl() {
 	}
@@ -37,7 +37,8 @@ public class WeatherServiceImpl implements WeatherService {
 	public void update() {
 		
 		int number = 0;
-		double sum_temp = 0.0;
+		double min_temp = 0.0;
+		double max_temp = 0.0;
 		double sum_rain = 0.0;
 		int today = 0;
 		
@@ -67,7 +68,8 @@ public class WeatherServiceImpl implements WeatherService {
 				if ( time >= 6 && time <= 18 && day == today ) {
 					Double temp = el.path("main").path("temp").asDouble();
 					logger.info(TECHNICAL,"temp: {}", temp);
-					sum_temp += temp;
+					if (temp > max_temp || max_temp == 0.0) max_temp = temp;
+					if (temp < min_temp || min_temp == 0.0) min_temp = temp;
 					Double rain = el.path("rain").path("3h").asDouble();
 					logger.info(TECHNICAL,"rain: {}", rain);
 					sum_rain += rain;
@@ -75,13 +77,25 @@ public class WeatherServiceImpl implements WeatherService {
 				}
 			}
 			
-			if (number > 0) {
-				if ( sum_rain / (double) number > 0.2)
+			if (number > 0) {				
+				if ( sum_rain / (double) number > 0.2) {
+					logger.info(TECHNICAL,"resulting rain: yes");
 					weather.setRaining(true);
-				weather.setTemperature( Math.round( ( sum_temp / (double) number - 273.15 )* 100.0 ) / 100.0 );
+				} else {
+					logger.info(TECHNICAL,"resulting rain: no");
+					weather.setRaining(false);
+				}
+				min_temp = Math.round( (min_temp - 273.15) * 100.0 ) / 100.0;
+				max_temp = Math.round( (max_temp - 273.15) * 100.0 ) / 100.0;
+				weather.setMinTemperature( min_temp );
+				weather.setMaxTemperature( max_temp );
+				logger.info(TECHNICAL,"resulting min Temp: {}", min_temp);
+				logger.info(TECHNICAL,"resulting max Temp: {}", max_temp);
 			} else {
 				weather.setRaining(false);
-				weather.setTemperature(0.0);
+				weather.setMinTemperature( -300.0 );
+				weather.setMaxTemperature( -300.0 );
+				logger.warn(TECHNICAL,"No data found");
 			}
 			
 		} catch (JsonProcessingException e) {

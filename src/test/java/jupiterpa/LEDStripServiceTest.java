@@ -42,7 +42,7 @@ public class LEDStripServiceTest {
     @SuppressWarnings("unchecked")
 	@Test
     public void test() throws Exception {
-    	Weather weather = new Weather(10.0,false);
+    	Weather weather = new Weather(10.0,10.0,false);
     	service.update(weather);
     	ClientMocking test = (ClientMocking) client;
     	List<Led> leds = (List<Led>) test.getState();

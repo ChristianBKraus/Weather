@@ -36,16 +36,17 @@ public class LEDStripServiceImpl implements LEDStripService {
 
 	@Override
 	public void update(Weather weather) {
-		Double t = weather.getTemperature();
+		Double min = weather.getMinTemperature();
+		Double max = weather.getMaxTemperature();
 		Boolean r = weather.isRaining();
 		Location loc;
 		
 		// 0/0 [Jacke]
 		loc = new Location(0,0);
-		if ( t < 5.0 ) {
+		if ( min < 5.0 ) {
 		  client.set(new Led(loc,Color.Red));
 		} else 
-		if ( t < 10.0) {
+		if ( min < 10.0) {
 			client.set(new Led(loc,Color.Yellow));
 		} else {
 			client.set(new Led(loc,Color.Black));
@@ -53,10 +54,10 @@ public class LEDStripServiceImpl implements LEDStripService {
 		
 		// 1/0 [Pulli]
 		loc = new Location(1,0);
-		if ( t < 8.0 ) {
+		if ( min < 8.0 ) {
 			  client.set(new Led(loc,Color.Red));
 			} else 
-			if ( t < 15.0) {
+			if ( min < 15.0) {
 				client.set(new Led(loc,Color.Yellow));
 			} else {
 				client.set(new Led(loc,Color.Black));

@@ -41,7 +41,8 @@ public class WeatherServiceTest {
     	mockMvc.perform(get(PATH))
         .andExpect(status().isOk())
         .andExpect(content().contentType(APPLICATION_JSON_UTF8))
-        .andExpect(jsonPath("$.temperature").value(3.91))
+        .andExpect(jsonPath("$.minTemperature").value(3.91))
+        .andExpect(jsonPath("$.maxTemperature").value(3.91))
         .andExpect(jsonPath("$.raining").value(false));
     }
     @Test
@@ -60,7 +61,8 @@ public class WeatherServiceTest {
     	mockMvc.perform(get(PATH))
         .andExpect(status().isOk())
         .andExpect(content().contentType(APPLICATION_JSON_UTF8))
-        .andExpect(jsonPath("$.temperature").value(3.91))
+        .andExpect(jsonPath("$.minTemperature").value(3.91))
+        .andExpect(jsonPath("$.maxTemperature").value(3.91))
         .andExpect(jsonPath("$.raining").value(false));
     }
     @Test
@@ -80,7 +82,8 @@ public class WeatherServiceTest {
     	mockMvc.perform(get(PATH))
         .andExpect(status().isOk())
         .andExpect(content().contentType(APPLICATION_JSON_UTF8))
-        .andExpect(jsonPath("$.temperature").value(3.91))
+        .andExpect(jsonPath("$.minTemperature").value(3.91))
+        .andExpect(jsonPath("$.maxTemperature").value(3.91))
         .andExpect(jsonPath("$.raining").value(false));
     }
     @Test
@@ -105,7 +108,8 @@ public class WeatherServiceTest {
     	mockMvc.perform(get(PATH))
         .andExpect(status().isOk())
         .andExpect(content().contentType(APPLICATION_JSON_UTF8))
-        .andExpect(jsonPath("$.temperature").value(4.91))
+        .andExpect(jsonPath("$.minTemperature").value(3.91))
+        .andExpect(jsonPath("$.maxTemperature").value(5.91))
         .andExpect(jsonPath("$.raining").value(true));
     }
     @Test
@@ -124,7 +128,7 @@ public class WeatherServiceTest {
     			+ "{ "
     			+ "\"dt_txt\": \"2017-12-20 20:00:00\", "
     			+ "\"rain\": { \"3h\": 0.18 }, "
-    			+ "\"main\": { \"temp\": 279.06 }"
+    			+ "\"main\": { \"temp\": 280.06 }"
     			+ "} "
     			+ "] }";
     	
@@ -135,7 +139,8 @@ public class WeatherServiceTest {
     	mockMvc.perform(get(PATH))
         .andExpect(status().isOk())
         .andExpect(content().contentType(APPLICATION_JSON_UTF8))
-        .andExpect(jsonPath("$.temperature").value(4.91))
+        .andExpect(jsonPath("$.minTemperature").value(3.91))
+        .andExpect(jsonPath("$.maxTemperature").value(5.91))
         .andExpect(jsonPath("$.raining").value(true));
     }
     
