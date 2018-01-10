@@ -30,7 +30,7 @@ public class Application implements CommandLineRunner {
 	@Override
 	public void run(String... arg0) throws Exception {
 		logger.info(TECHNICAL,"Initialize Service");
-		service.initialize();
+		service.update();
 		logger.info(TECHNICAL,"Service Initialization Done");
 	}
 }

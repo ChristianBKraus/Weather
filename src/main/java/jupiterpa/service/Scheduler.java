@@ -16,12 +16,21 @@ public class Scheduler {
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
-	WeatherService service;
+	WeatherService weatherService;
+	@Autowired
+	LEDStripService ledStripService;
 	
 	@Scheduled(fixedRate = 10000) //3600000)
 	public void updateWeather() {
 		logger.info(TECHNICAL,"Update Weather");
-		service.initialize();
+		weatherService.update();
 		logger.info(TECHNICAL,"Weather updated");
+	}
+	
+	@Scheduled(fixedRate = 5000) 
+	public void updateLEDStrip() {
+		logger.info(TECHNICAL,"Update LEDStrip");
+		ledStripService.update(weatherService.getWeather());
+		logger.info(TECHNICAL,"LEDStrip updated");
 	}
 }

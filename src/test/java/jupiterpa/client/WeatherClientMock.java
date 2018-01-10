@@ -18,6 +18,9 @@ public class WeatherClientMock implements WeatherClient, ClientMocking {
 	public void inject(Object result) {
 		this.result = (String) result;
 	}
+	public Object getState() {
+		return null;
+	}
 
 	public String read() {
 		return result;

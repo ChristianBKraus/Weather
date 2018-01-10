@@ -25,7 +25,7 @@ import jupiterpa.service.WeatherServiceImpl;
 @SpringBootTest
 @AutoConfigureMockMvc
 @ActiveProfiles({"mock","test"})
-public class WeatherControllerTest { 
+public class WeatherServiceTest { 
 	final String PATH = Controller.PATH; 
 
 	@Autowired
@@ -37,7 +37,7 @@ public class WeatherControllerTest {
     
     @Test
     public void getDefaultWeather() throws Exception {
-    	service.initialize();
+    	service.update();
     	mockMvc.perform(get(PATH))
         .andExpect(status().isOk())
         .andExpect(content().contentType(APPLICATION_JSON_UTF8))
@@ -55,7 +55,7 @@ public class WeatherControllerTest {
     	
         ClientMocking mock = (ClientMocking) client;
         mock.inject(result);
-    	service.initialize();
+    	service.update();
     	
     	mockMvc.perform(get(PATH))
         .andExpect(status().isOk())
@@ -75,7 +75,7 @@ public class WeatherControllerTest {
     	
         ClientMocking mock = (ClientMocking) client;
         mock.inject(result);
-    	service.initialize();
+    	service.update();
     	
     	mockMvc.perform(get(PATH))
         .andExpect(status().isOk())
@@ -100,7 +100,7 @@ public class WeatherControllerTest {
     	
         ClientMocking mock = (ClientMocking) client;
         mock.inject(result);
-    	service.initialize();
+    	service.update();
     	
     	mockMvc.perform(get(PATH))
         .andExpect(status().isOk())
@@ -130,7 +130,7 @@ public class WeatherControllerTest {
     	
         ClientMocking mock = (ClientMocking) client;
         mock.inject(result);
-    	service.initialize();
+    	service.update();
     	
     	mockMvc.perform(get(PATH))
         .andExpect(status().isOk())

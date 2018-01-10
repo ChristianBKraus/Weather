@@ -34,7 +34,7 @@ public class WeatherServiceImpl implements WeatherService {
 	}
 	
 	@Override
-	public void initialize() {
+	public void update() {
 		
 		int number = 0;
 		double sum_temp = 0.0;
