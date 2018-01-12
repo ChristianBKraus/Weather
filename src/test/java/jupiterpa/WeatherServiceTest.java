@@ -6,7 +6,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import java.awt.List;
 import java.util.ArrayList;
 
 import org.junit.Test;
@@ -20,7 +19,6 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import jupiterpa.client.ClientMocking;
 import jupiterpa.client.WeatherClient;
-import jupiterpa.client.WeatherClientMock;
 import jupiterpa.controller.Controller;
 import jupiterpa.service.WeatherServiceImpl;
 

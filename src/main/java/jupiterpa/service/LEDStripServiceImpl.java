@@ -1,24 +1,13 @@
 package jupiterpa.service;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ArrayNode;
-
 import jupiterpa.client.LEDStripClient;
-import jupiterpa.client.WeatherClient;
 import jupiterpa.model.Color;
 import jupiterpa.model.Daylight;
 import jupiterpa.model.Led;
@@ -39,7 +28,9 @@ public class LEDStripServiceImpl implements LEDStripService {
 	@Override
 	public void update(Weather weather, Daylight daylight) {
 		Double min = weather.getMinTemperature();
+		@SuppressWarnings("unused")
 		Double max = weather.getMaxTemperature();
+		@SuppressWarnings("unused")
 		Boolean r = weather.isRaining();
 		
 		Long sunrise = daylight.getSunrise();
@@ -48,6 +39,7 @@ public class LEDStripServiceImpl implements LEDStripService {
 		
 		Location loc;
 		
+		logger.info(TECHNICAL," Update Jacke");
 		// 0/0 [Jacke]
 		loc = new Location(0,0);
 		if ( min < 5.0 ) {
@@ -59,6 +51,7 @@ public class LEDStripServiceImpl implements LEDStripService {
 			client.set(new Led(loc,Color.Black));
 		}
 		
+		logger.info(TECHNICAL," Update Pulli");
 		// 1/0 [Pulli]
 		loc = new Location(1,0);
 		if ( min < 8.0 ) {
@@ -70,6 +63,7 @@ public class LEDStripServiceImpl implements LEDStripService {
 				client.set(new Led(loc,Color.Black));
 			}
 		
+		logger.info(TECHNICAL," Update Sun");
 		// 0/1 [Sun]
 		loc = new Location(0,1);
 		if ( current > sunrise && current < sunset ) {
@@ -78,6 +72,7 @@ public class LEDStripServiceImpl implements LEDStripService {
 			client.set(new Led(loc,Color.Black));
 		}
 
+		logger.info(TECHNICAL," Update Moon");
 		// 1/1 [Moon]
 		loc = new Location(1,1);
 		if ( current <= sunrise || current >= sunset ) {

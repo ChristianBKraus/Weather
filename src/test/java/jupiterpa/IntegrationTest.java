@@ -4,10 +4,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.junit.Assert.assertEquals;
 import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.util.List;
@@ -27,12 +24,10 @@ import org.springframework.test.web.servlet.MockMvc;
 import jupiterpa.client.ClientMocking;
 import jupiterpa.client.LEDStripClient;
 import jupiterpa.client.WeatherClient;
-import jupiterpa.client.WeatherClientMock;
 import jupiterpa.controller.Controller;
 import jupiterpa.model.Led;
 import jupiterpa.model.Color;
 import jupiterpa.model.Location;
-import jupiterpa.service.WeatherServiceImpl;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -79,7 +74,8 @@ public class IntegrationTest {
     	
     	ClientMocking test = (ClientMocking) ledStrip;
     	
-    	List<Led> leds = (List<Led>) test.getState();
+    	@SuppressWarnings("unchecked")
+		List<Led> leds = (List<Led>) test.getState();
     	
     	assertThat(leds, hasSize(4) );
     	Led led = leds.get(0);

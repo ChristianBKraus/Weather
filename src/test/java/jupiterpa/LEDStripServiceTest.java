@@ -12,12 +12,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.web.servlet.MockMvc;
-
-import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
-import static org.hamcrest.collection.IsIterableContainingInAnyOrder.containsInAnyOrder;
-import static org.hamcrest.collection.IsIterableContainingInOrder.contains;
 import static org.junit.Assert.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -30,7 +25,6 @@ import jupiterpa.model.Led;
 import jupiterpa.model.Location;
 import jupiterpa.model.Weather;
 import jupiterpa.service.LEDStripService;
-import jupiterpa.service.LEDStripServiceImpl;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest

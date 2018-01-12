@@ -18,11 +18,12 @@ public class WeatherClientMock implements WeatherClient, ClientMocking {
 			+ "\"main\": { \"temp\": 277.06 }"
 			+ "} ] }";
 	String current = "";
+	@SuppressWarnings("unchecked")
 	public void inject(Object result) {
-		List list = (List) result;
-		this.forecast = (String) list.get(0);
+		List<String> list = (List<String>) result;
+		this.forecast = list.get(0);
 		if (list.size() > 1)
-  		  this.current = (String) list.get(1);
+  		  this.current = list.get(1);
 	}
 	public Object getState() {
 		return null;
