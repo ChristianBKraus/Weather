@@ -1,5 +1,6 @@
 package jupiterpa.client;
 
 public interface WeatherClient {
-	public String read();
+	public String getForecast();
+	public String getCurrentWeather();
 }

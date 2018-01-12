@@ -1,5 +1,7 @@
 package jupiterpa.client;
 
+import java.util.List;
+
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
@@ -9,21 +11,30 @@ import jupiterpa.client.WeatherClient;
 @Profile("mock")
 public class WeatherClientMock implements WeatherClient, ClientMocking {
 	
-	String result = "{ \"list\": [ "
+	String forecast = "{ \"list\": [ "
 			+ "{ "
 			+ "\"dt_txt\": \"2017-12-20 15:00:00\", "
 			+ "\"rain\": { \"3h\": 0.16 }, "
 			+ "\"main\": { \"temp\": 277.06 }"
 			+ "} ] }";
+	String current = "";
 	public void inject(Object result) {
-		this.result = (String) result;
+		List list = (List) result;
+		this.forecast = (String) list.get(0);
+		if (list.size() > 1)
+  		  this.current = (String) list.get(1);
 	}
 	public Object getState() {
 		return null;
 	}
 
-	public String read() {
-		return result;
+	@Override
+	public String getForecast() {
+		return forecast;
+	}
+	@Override
+	public String getCurrentWeather() {
+		return current;
 	}
 
 }

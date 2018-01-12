@@ -14,6 +14,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 
 import jupiterpa.client.WeatherClient;
+import jupiterpa.model.Daylight;
 import jupiterpa.model.Weather;
 
 @Component
@@ -24,6 +25,7 @@ public class WeatherServiceImpl implements WeatherService {
 	
 	@Autowired WeatherClient client;
 	Weather weather = new Weather(-300.0,-300.0,false);
+	Daylight daylight = new Daylight(0L,0L);
 		
 	public WeatherServiceImpl() {
 	}
@@ -32,19 +34,54 @@ public class WeatherServiceImpl implements WeatherService {
 	public Weather getWeather() {
 		return weather;
 	}
+	@Override
+	public Daylight getDaylight() {
+		return daylight;
+	}
 	
 	@Override
 	public void update() {
+		updateForecast();
+		updateCurrent();
+	}
+	
+	private void updateCurrent() {
+		logger.info(TECHNICAL,"Initialize Current Weather");
+
+		String result = client.getCurrentWeather();
+		if (result == "") {
+			// keep old value [potentiall dummy ones]
+			return;
+		}
 		
+		try {		
+		    // Extract info
+		    ObjectMapper mapper = new ObjectMapper();
+			    JsonNode root = mapper.readTree(result);
+			Long sunrise = root.path("sys").path("sunrise").asLong();
+			Long sunset = root.path("sys").path("sunset").asLong();
+			daylight.setSunrise(sunrise);
+			daylight.setSunset(sunset);
+			
+			logger.info(TECHNICAL, "Resulting {}", daylight);
+			
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} 
+	}
+	
+	private void updateForecast() {	
 		int number = 0;
 		double min_temp = 0.0;
 		double max_temp = 0.0;
 		double sum_rain = 0.0;
 		int today = 0;
 		
-		logger.info(TECHNICAL,"Initialize Weather");
+		logger.info(TECHNICAL,"Initialize Forecast Weather");
 
-		String result = client.read();
+		String result = client.getForecast();
 		if (result == "") {
 			// keep old value [potentiall dummy ones]
 			return;

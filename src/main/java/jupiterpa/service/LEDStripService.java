@@ -1,10 +1,7 @@
 package jupiterpa.service;
 
-import java.util.List;
-
-import jupiterpa.model.Led;
-import jupiterpa.model.Weather;
+import jupiterpa.model.*;
 
 public interface LEDStripService {
-	public void update(Weather weather);
+	public void update(Weather weather, Daylight daylight);
 }

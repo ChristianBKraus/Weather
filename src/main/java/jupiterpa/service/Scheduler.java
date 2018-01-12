@@ -30,7 +30,7 @@ public class Scheduler {
 	@Scheduled(fixedRate = 5000) 
 	public void updateLEDStrip() {
 		logger.info(TECHNICAL,"Update LEDStrip");
-		ledStripService.update(weatherService.getWeather());
+		ledStripService.update(weatherService.getWeather(), weatherService.getDaylight());
 		logger.info(TECHNICAL,"LEDStrip updated");
 	}
 }

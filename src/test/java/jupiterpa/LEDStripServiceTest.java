@@ -1,5 +1,6 @@
 package jupiterpa;
 
+import java.util.Date;
 import java.util.List;
 
 import org.junit.Test;
@@ -22,6 +23,7 @@ import jupiterpa.client.ClientMocking;
 import jupiterpa.client.LEDStripClient;
 import jupiterpa.controller.Controller;
 import jupiterpa.model.Color;
+import jupiterpa.model.Daylight;
 import jupiterpa.model.Led;
 import jupiterpa.model.Location;
 import jupiterpa.model.Weather;
@@ -42,12 +44,14 @@ public class LEDStripServiceTest {
     @SuppressWarnings("unchecked")
 	@Test
     public void test() throws Exception {
+    	Long current = (new Date()).getTime();
     	Weather weather = new Weather(10.0,10.0,false);
-    	service.update(weather);
+    	Daylight daylight = new Daylight(current-100, current + 100);
+    	service.update(weather,daylight);
     	ClientMocking test = (ClientMocking) client;
     	List<Led> leds = (List<Led>) test.getState();
     	
-    	assertThat(leds, hasSize(2) );
+    	assertThat(leds, hasSize(4) );
     	Led led = leds.get(0);
     	assertEquals((new Location(0,0)).toString(), led.getLocation().toString());
     	assertEquals(Color.Black.toString(), led.getColor().toString());
@@ -55,5 +59,13 @@ public class LEDStripServiceTest {
     	led = leds.get(1);
     	assertEquals((new Location(1,0)).toString(), led.getLocation().toString());
     	assertEquals(Color.Yellow.toString(), led.getColor().toString());
+
+    	led = leds.get(2);
+    	assertEquals((new Location(0,1)).toString(), led.getLocation().toString());
+    	assertEquals(Color.Yellow.toString(), led.getColor().toString());
+
+    	led = leds.get(3);
+    	assertEquals((new Location(1,1)).toString(), led.getLocation().toString());
+    	assertEquals(Color.Black.toString(), led.getColor().toString());
     }
 }

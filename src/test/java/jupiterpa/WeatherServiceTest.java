@@ -6,6 +6,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.awt.List;
+import java.util.ArrayList;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,9 +56,11 @@ public class WeatherServiceTest {
     			+ "\"rain\": { \"3h\": 0.16 }, "
     			+ "\"main\": { \"temp\": 277.06 }"
     			+ "} ] }";
+    	ArrayList<String> list = new ArrayList<String>();
+    	list.add(result);
     	
         ClientMocking mock = (ClientMocking) client;
-        mock.inject(result);
+        mock.inject(list);
     	service.update();
     	
     	mockMvc.perform(get(PATH))
@@ -74,9 +79,11 @@ public class WeatherServiceTest {
     			+ "\"other\": { \"2h\": 0.16 }, "
     			+ "\"main\": { \"temp\": 277.06 }"
     			+ "} ] }";
+    	ArrayList<String> list = new ArrayList<String>();
+    	list.add(result);
     	
         ClientMocking mock = (ClientMocking) client;
-        mock.inject(result);
+        mock.inject(list);
     	service.update();
     	
     	mockMvc.perform(get(PATH))
@@ -100,9 +107,11 @@ public class WeatherServiceTest {
     			+ "\"main\": { \"temp\": 279.06 }"
     			+ "} "
     			+ "] }";
+    	ArrayList<String> list = new ArrayList<String>();
+    	list.add(result);
     	
         ClientMocking mock = (ClientMocking) client;
-        mock.inject(result);
+        mock.inject(list);
     	service.update();
     	
     	mockMvc.perform(get(PATH))
@@ -131,9 +140,11 @@ public class WeatherServiceTest {
     			+ "\"main\": { \"temp\": 280.06 }"
     			+ "} "
     			+ "] }";
+    	ArrayList<String> list = new ArrayList<String>();
+    	list.add(result);
     	
         ClientMocking mock = (ClientMocking) client;
-        mock.inject(result);
+        mock.inject(list);
     	service.update();
     	
     	mockMvc.perform(get(PATH))
@@ -142,6 +153,32 @@ public class WeatherServiceTest {
         .andExpect(jsonPath("$.minTemperature").value(3.91))
         .andExpect(jsonPath("$.maxTemperature").value(5.91))
         .andExpect(jsonPath("$.raining").value(true));
+    }
+    @Test
+    public void getDaylight() throws Exception {
+    	ArrayList<String> list = new ArrayList<String>();
+    	String forecast = "{ \"list\": [ "
+    			+ "{ "
+    			+ "\"dt_txt\": \"2017-12-20 15:00:00\", "
+    			+ "\"rain\": { \"3h\": 0.16 }, "
+    			+ "\"main\": { \"temp\": 277.06 }"
+    			+ "} ] }";
+    	list.add(forecast);
+    	String current = "{ \"sys\": { " 
+    			+ "\"sunrise\": 1513667947," 
+    			+ "\"sunset\": 1513697300 "
+    			+ "} }";
+    	list.add(current);
+    	
+        ClientMocking mock = (ClientMocking) client;
+        mock.inject(list);
+    	service.update();
+    	
+    	mockMvc.perform(get(PATH + "/daylight" ))
+        .andExpect(status().isOk())
+        .andExpect(content().contentType(APPLICATION_JSON_UTF8))
+        .andExpect(jsonPath("$.sunrise").value(1513667947))
+        .andExpect(jsonPath("$.sunset").value(1513697300));
     }
     
 }

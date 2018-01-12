@@ -20,8 +20,8 @@ public class WeatherClientImpl implements WeatherClient {
 	
 	private final RestTemplate template = new RestTemplate();
  	
-	@HystrixCommand(fallbackMethod = "defaultRead")
-	public String read() {
+	@HystrixCommand(fallbackMethod = "defaultGet")
+	public String getForecast() {
 
 		URI uri = URI.create("http://api.openweathermap.org/data/2.5/forecast"
 				+ "?q=Mannheim,de"
@@ -33,7 +33,21 @@ public class WeatherClientImpl implements WeatherClient {
 		return result;
 	}
 	
-	public String defaultRead() {
+	@HystrixCommand(fallbackMethod = "defaultGet")
+	public String getCurrentWeather() {
+
+		URI uri = URI.create("http://api.openweathermap.org/data/2.5/weather"
+				+ "?q=Mannheim,de"
+				+ "&appid=87256645a845911683bca32ee3331851");
+		
+		String result = 
+			template.getForObject(uri, String.class);
+		
+		return result;
+	}
+	
+	
+	public String defaultGet() {
 		String result = "";
 		
 		logger.warn(TECHNICAL, "GET Weather failed");

@@ -2,6 +2,7 @@ package jupiterpa.service;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -19,6 +20,7 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import jupiterpa.client.LEDStripClient;
 import jupiterpa.client.WeatherClient;
 import jupiterpa.model.Color;
+import jupiterpa.model.Daylight;
 import jupiterpa.model.Led;
 import jupiterpa.model.Location;
 import jupiterpa.model.Weather;
@@ -35,10 +37,15 @@ public class LEDStripServiceImpl implements LEDStripService {
 	}
 
 	@Override
-	public void update(Weather weather) {
+	public void update(Weather weather, Daylight daylight) {
 		Double min = weather.getMinTemperature();
 		Double max = weather.getMaxTemperature();
 		Boolean r = weather.isRaining();
+		
+		Long sunrise = daylight.getSunrise();
+		Long sunset  = daylight.getSunset();
+		Long current = (new Date()).getTime();
+		
 		Location loc;
 		
 		// 0/0 [Jacke]
@@ -62,5 +69,21 @@ public class LEDStripServiceImpl implements LEDStripService {
 			} else {
 				client.set(new Led(loc,Color.Black));
 			}
+		
+		// 0/1 [Sun]
+		loc = new Location(0,1);
+		if ( current > sunrise && current < sunset ) {
+			client.set(new Led(loc,Color.Yellow));
+		} else {
+			client.set(new Led(loc,Color.Black));
+		}
+
+		// 1/1 [Moon]
+		loc = new Location(1,1);
+		if ( current <= sunrise || current >= sunset ) {
+			client.set(new Led(loc,Color.Yellow));
+		} else {
+			client.set(new Led(loc,Color.Black));
+		}
 	}	
 }
