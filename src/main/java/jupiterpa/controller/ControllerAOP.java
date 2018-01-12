@@ -26,7 +26,11 @@ public class ControllerAOP
 
 		try {
 			Object result = joinPoint.proceed();
-			logger.info(TECHNICAL, " -> Result: {}", result.toString());
+			if (result != null) {
+				logger.info(TECHNICAL, " -> Result: {}", result.toString());
+			} else {
+				logger.info(TECHNICAL, " -> Done");
+			}
 			return result;
 		} catch (Throwable e) {
 			logger.error(TECHNICAL, "  => " + e ); 

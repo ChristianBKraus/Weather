@@ -1,8 +1,10 @@
 package jupiterpa;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +29,7 @@ import jupiterpa.model.Daylight;
 import jupiterpa.model.Led;
 import jupiterpa.model.Location;
 import jupiterpa.model.Weather;
+import jupiterpa.service.LEDStripService;
 import jupiterpa.service.LEDStripServiceImpl;
 
 @RunWith(SpringRunner.class)
@@ -39,8 +42,14 @@ public class LEDStripServiceTest {
 	@Autowired
 	private LEDStripClient client;
 	@Autowired
-	private LEDStripServiceImpl service;
+	private LEDStripService service;
     
+	@Before
+	public void initialize() {
+        ClientMocking mock = (ClientMocking) client;
+        mock.inject(new ArrayList<Led>());
+	}
+	
     @SuppressWarnings("unchecked")
 	@Test
     public void test() throws Exception {
