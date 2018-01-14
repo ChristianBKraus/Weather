@@ -13,6 +13,8 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 
+import jupiterpa.actuator.HealthInfo;
+import jupiterpa.actuator.InterfaceHealth;
 import jupiterpa.client.WeatherClient;
 import jupiterpa.model.Daylight;
 import jupiterpa.model.Weather;
@@ -24,6 +26,8 @@ public class WeatherServiceImpl implements WeatherService {
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired WeatherClient client;
+	@Autowired InterfaceHealth health;
+	
 	Weather weather = new Weather(-300.0,-300.0,false);
 	Daylight daylight = new Daylight(0L,0L);
 		
@@ -51,8 +55,11 @@ public class WeatherServiceImpl implements WeatherService {
 		String result = client.getCurrentWeather();
 		if (result == "") {
 			// keep old value [potentiall dummy ones]
+			health.setHealth(new HealthInfo("currentWeather",true,"not available"));
 			return;
 		}
+		health.setHealth(new HealthInfo("currentWeather",false,"available"));
+		
 		
 		try {		
 		    // Extract info
@@ -84,8 +91,10 @@ public class WeatherServiceImpl implements WeatherService {
 		String result = client.getForecast();
 		if (result == "") {
 			// keep old value [potentiall dummy ones]
+			health.setHealth(new HealthInfo("forecastWeather",true,"not available"));
 			return;
 		}
+		health.setHealth(new HealthInfo("forecastWeather",false,"available"));
 		
 		try {		
 		    // Extract info

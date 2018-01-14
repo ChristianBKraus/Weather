@@ -29,7 +29,7 @@ public class LEDStripClientImpl implements LEDStripClient {
 		template.put(uri, led);
 	}
 	
-	public void defaultSet() {
+	public void defaultSet(Led led) {
 		logger.warn(TECHNICAL, "SET LEDStrip failed");
 	}
 

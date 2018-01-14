@@ -26,5 +26,10 @@ public class LEDStripClientMock implements LEDStripClient, ClientMocking {
 	public void set(Led led) {
 		leds.add(led);
 	}
+	@Override
+	public void defaultSet(Led led) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }
