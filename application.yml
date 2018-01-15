@@ -1,9 +1,9 @@
 # application.yml
 
 application:
-	name: WeatherController
-	description: Weather Controller for Planer
-	version: 1.0.0                
+    name: WeatherController
+    description: Weather Controller for Planer
+    version: 1.0.0                
 
 server:
     port: 9989
