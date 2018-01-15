@@ -44,7 +44,11 @@ public class WeatherServiceImpl implements WeatherService {
 	}
 	
 	@Override
-	public void update() {
+	public void update(boolean enforce) {
+		if (enforce) {
+			weather = new Weather(-300.0,-300.0,false);
+			daylight = new Daylight(0L,0L);
+		}
 		updateForecast();
 		updateCurrent();
 	}

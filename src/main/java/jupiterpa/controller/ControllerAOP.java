@@ -7,6 +7,7 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.slf4j.MDC;
 import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
 import org.springframework.stereotype.Component;
@@ -22,6 +23,7 @@ public class ControllerAOP
 	@Around("execution(* jupiterpa.controller.*.*(..))")
 	public Object log(ProceedingJoinPoint joinPoint) throws Throwable {
 
+        MDC.put("endpoint", Controller.PATH );
         logger.info(TECHNICAL, " Service {} ({})", joinPoint.getSignature().toString(),  Arrays.toString(joinPoint.getArgs()));
 
 		try {

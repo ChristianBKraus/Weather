@@ -20,6 +20,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import jupiterpa.client.ClientMocking;
 import jupiterpa.client.WeatherClient;
 import jupiterpa.controller.Controller;
+import jupiterpa.model.Weather;
 import jupiterpa.service.WeatherServiceImpl;
 
 @RunWith(SpringRunner.class)
@@ -38,7 +39,7 @@ public class WeatherServiceTest {
     
     @Test
     public void getDefaultWeather() throws Exception {
-    	service.update();
+    	service.update(false);
     	mockMvc.perform(get(PATH))
         .andExpect(status().isOk())
         .andExpect(content().contentType(APPLICATION_JSON_UTF8))
@@ -59,7 +60,7 @@ public class WeatherServiceTest {
     	
         ClientMocking mock = (ClientMocking) client;
         mock.inject(list);
-    	service.update();
+    	service.update(false);
     	
     	mockMvc.perform(get(PATH))
         .andExpect(status().isOk())
@@ -82,7 +83,7 @@ public class WeatherServiceTest {
     	
         ClientMocking mock = (ClientMocking) client;
         mock.inject(list);
-    	service.update();
+    	service.update(false);
     	
     	mockMvc.perform(get(PATH))
         .andExpect(status().isOk())
@@ -110,7 +111,7 @@ public class WeatherServiceTest {
     	
         ClientMocking mock = (ClientMocking) client;
         mock.inject(list);
-    	service.update();
+    	service.update(false);
     	
     	mockMvc.perform(get(PATH))
         .andExpect(status().isOk())
@@ -143,7 +144,7 @@ public class WeatherServiceTest {
     	
         ClientMocking mock = (ClientMocking) client;
         mock.inject(list);
-    	service.update();
+    	service.update(false);
     	
     	mockMvc.perform(get(PATH))
         .andExpect(status().isOk())
@@ -151,6 +152,34 @@ public class WeatherServiceTest {
         .andExpect(jsonPath("$.minTemperature").value(3.91))
         .andExpect(jsonPath("$.maxTemperature").value(5.91))
         .andExpect(jsonPath("$.raining").value(true));
+    }
+    @Test
+    public void getNoWeather() throws Exception {
+    	Weather old_weather = service.getWeather();
+    
+    	String result = "";
+    	ArrayList<String> list = new ArrayList<String>();
+    	list.add(result);
+    	
+        ClientMocking mock = (ClientMocking) client;
+        mock.inject(list);
+    	service.update(false);
+    	
+    	mockMvc.perform(get(PATH))
+        .andExpect(status().isOk())
+        .andExpect(content().contentType(APPLICATION_JSON_UTF8))
+        .andExpect(jsonPath("$.minTemperature").value(old_weather.getMinTemperature()))
+        .andExpect(jsonPath("$.maxTemperature").value(old_weather.getMaxTemperature()))
+        .andExpect(jsonPath("$.raining").value(old_weather.isRaining()));
+
+    	service.update(true);
+		old_weather = new Weather(-300.0,-300.0,false);
+    	mockMvc.perform(get(PATH))
+        .andExpect(status().isOk())
+        .andExpect(content().contentType(APPLICATION_JSON_UTF8))
+        .andExpect(jsonPath("$.minTemperature").value(old_weather.getMinTemperature()))
+        .andExpect(jsonPath("$.maxTemperature").value(old_weather.getMaxTemperature()))
+        .andExpect(jsonPath("$.raining").value(old_weather.isRaining()));
     }
     @Test
     public void getDaylight() throws Exception {
@@ -170,7 +199,7 @@ public class WeatherServiceTest {
     	
         ClientMocking mock = (ClientMocking) client;
         mock.inject(list);
-    	service.update();
+    	service.update(false);
     	
     	mockMvc.perform(get(PATH + "/daylight" ))
         .andExpect(status().isOk())

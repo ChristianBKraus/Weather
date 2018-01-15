@@ -48,7 +48,7 @@ public class Controller {
         @ApiResponse(code = 200, message = "Updated Successfully")
     })
     public void update() {
-    	weatherService.update();
+    	weatherService.update(false);
     	ledStripService.update(weatherService.getWeather(), weatherService.getDaylight());
     }
 

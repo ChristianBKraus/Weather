@@ -2,12 +2,15 @@ package jupiterpa.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.slf4j.MDC;
 import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+
+import jupiterpa.controller.Controller;
 
 @Component
 @Profile("default")
@@ -20,15 +23,17 @@ public class Scheduler {
 	@Autowired
 	LEDStripService ledStripService;
 	
-	@Scheduled(fixedRate = 10000) //3600000)
+	@Scheduled(fixedRate = 3600000)
 	public void updateWeather() {
+        MDC.put("endpoint","Scheduler - Update Weather" );		
 		logger.info(TECHNICAL,"Update Weather");
-		weatherService.update();
+		weatherService.update(false);
 		logger.info(TECHNICAL,"Weather updated");
 	}
 	
 	@Scheduled(fixedRate = 5000) 
 	public void updateLEDStrip() {
+        MDC.put("endpoint","Scheduler - Update LEDStrip" );		
 		logger.info(TECHNICAL,"Update LEDStrip");
 		ledStripService.update(weatherService.getWeather(), weatherService.getDaylight());
 		logger.info(TECHNICAL,"LEDStrip updated");
