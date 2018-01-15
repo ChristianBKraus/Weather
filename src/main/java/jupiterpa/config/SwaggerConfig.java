@@ -1,5 +1,6 @@
 package jupiterpa.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -13,6 +14,10 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @Configuration
 @EnableSwagger2
 public class SwaggerConfig {
+	
+	@Autowired
+	ApplicationConfig appl;
+	
     @Bean
     public Docket productApi() {
         return new Docket(DocumentationType.SWAGGER_2)
@@ -25,9 +30,9 @@ public class SwaggerConfig {
     private ApiInfo metaData() {
 		@SuppressWarnings("deprecation")
 		ApiInfo apiInfo = new ApiInfo(
-        		"Weather - Controller",
-        		"Weather Controller for Planer",
-                "1.0",
+        		appl.getName(),
+        		appl.getDescription(),
+                appl.getVersion(),
                 "",
                 "JupiterPa",
                 "Apache License Version 2.0",

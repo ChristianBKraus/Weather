@@ -1,0 +1,20 @@
+# application.yml
+
+application:
+	name: WeatherController
+	description: Weather Controller for Planer
+	version: 1.0.0                
+
+server:
+    port: 9989
+management:
+    port: 8989
+
+
+endpoints:
+    sensitive: false
+    enabled: true
+    health:
+        sensitive: false
+management.security.enabled: false 
+    
