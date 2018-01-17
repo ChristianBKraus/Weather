@@ -31,7 +31,7 @@ public class Scheduler {
 		logger.info(TECHNICAL,"Weather updated");
 	}
 	
-	@Scheduled(fixedRate = 5000) 
+	@Scheduled(fixedRate = 300000) 
 	public void updateLEDStrip() {
         MDC.put("endpoint","Scheduler - Update LEDStrip" );		
 		logger.info(TECHNICAL,"Update LEDStrip");
