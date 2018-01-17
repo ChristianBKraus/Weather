@@ -17,6 +17,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -32,6 +33,7 @@ import jupiterpa.model.Location;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
+@WithMockUser(roles="ADMIN")
 @ActiveProfiles({"mock","test"})
 public class IntegrationTest { 
 	final String PATH = Controller.PATH; 
@@ -56,7 +58,7 @@ public class IntegrationTest {
     			+ "{ "
     			+ "\"dt_txt\": \"2017-12-20 15:00:00\", "
     			+ "\"rain\": { \"3h\": 0.16 }, "
-    			+ "\"main\": { \"temp\": 283.15 }"
+    			+ "\"main\": { \"temp\": 284.15 }"
     			+ "} ] }";
     	list.add(forecast);
     	Long current_time = (new Date()).getTime();
@@ -77,22 +79,21 @@ public class IntegrationTest {
     	@SuppressWarnings("unchecked")
 		List<Led> leds = (List<Led>) test.getState();
     	
-    	assertThat(leds, hasSize(4) );
-    	Led led = leds.get(0);
-    	assertEquals((new Location(0,0)).toString(), led.getLocation().toString());
-    	assertEquals(Color.Black.toString(), led.getColor().toString());
-
-    	led = leds.get(1);
-    	assertEquals((new Location(1,0)).toString(), led.getLocation().toString());
-    	assertEquals(Color.Yellow.toString(), led.getColor().toString());
-
-    	led = leds.get(2);
-    	assertEquals((new Location(0,1)).toString(), led.getLocation().toString());
-    	assertEquals(Color.Yellow.toString(), led.getColor().toString());
-
-    	led = leds.get(3);
-    	assertEquals((new Location(1,1)).toString(), led.getLocation().toString());
-    	assertEquals(Color.Black.toString(), led.getColor().toString());
+    	assertThat(leds, hasSize(7) );
+    	for(Led led: leds) {
+    		System.out.println(led);
+    		System.out.println(led.getLocation().toString());
+    		switch (led.getLocation().toString()) {
+    			case "0/0":  assertEquals(Color.Yellow.toString(), led.getColor().toString()); break;
+    			case "0/2":  assertEquals(Color.Black.toString(), led.getColor().toString()); break;
+    			case "0/1":  assertEquals(Color.Black.toString(), led.getColor().toString()); break;
+    			case "1/1":  assertEquals(Color.Black.toString(), led.getColor().toString()); break;
+    			case "2/1":  assertEquals(Color.Black.toString(), led.getColor().toString()); break;
+    			case "3/1":  assertEquals(new Color(25,0,229).toString(), led.getColor().toString()); break;
+    			case "4/1":  assertEquals(Color.Red.toString(), led.getColor().toString()); break;
+    			default: assertEquals(0,1);
+    		}
+    	}
     	
     }
 }

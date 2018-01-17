@@ -48,27 +48,24 @@ public class LEDStripServiceTest {
 	@Test
     public void test() throws Exception {
     	Long current = (new Date()).getTime();
-    	Weather weather = new Weather(10.0,10.0,false);
+    	Weather weather = new Weather(9.0,11.0,false);
     	Daylight daylight = new Daylight(current-100, current + 100);
     	service.update(weather,daylight);
     	ClientMocking test = (ClientMocking) client;
     	List<Led> leds = (List<Led>) test.getState();
     	
-    	assertThat(leds, hasSize(4) );
-    	Led led = leds.get(0);
-    	assertEquals((new Location(0,0)).toString(), led.getLocation().toString());
-    	assertEquals(Color.Black.toString(), led.getColor().toString());
-
-    	led = leds.get(1);
-    	assertEquals((new Location(1,0)).toString(), led.getLocation().toString());
-    	assertEquals(Color.Yellow.toString(), led.getColor().toString());
-
-    	led = leds.get(2);
-    	assertEquals((new Location(0,1)).toString(), led.getLocation().toString());
-    	assertEquals(Color.Yellow.toString(), led.getColor().toString());
-
-    	led = leds.get(3);
-    	assertEquals((new Location(1,1)).toString(), led.getLocation().toString());
-    	assertEquals(Color.Black.toString(), led.getColor().toString());
+    	assertThat(leds, hasSize(7) );
+    	for(Led led: leds) {
+    		switch (led.getLocation().toString()) {
+    			case "0/0":  assertEquals(Color.Yellow.toString(), led.getColor().toString()); break;
+    			case "0/2":  assertEquals(Color.Black.toString(), led.getColor().toString()); break;
+    			case "0/1":  assertEquals(Color.Black.toString(), led.getColor().toString()); break;
+    			case "1/1":  assertEquals(Color.Black.toString(), led.getColor().toString()); break;
+    			case "2/1":  assertEquals(Color.Black.toString(), led.getColor().toString()); break;
+    			case "3/1":  assertEquals(new Color(25,0,229).toString(), led.getColor().toString()); break;
+    			case "4/1":  assertEquals(Color.Red.toString(), led.getColor().toString()); break;
+    			default: assertEquals(0,1);
+    		}
+    	}
     }
 }
