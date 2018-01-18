@@ -1,5 +1,6 @@
 package jupiterpa.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -14,13 +15,16 @@ import jupiterpa.controller.Controller;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
+	@Autowired
+	ApplicationConfig config;
+	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth)
 	throws Exception {
 		auth
 			.inMemoryAuthentication()
-			.withUser("user").password("password").roles("USER").and()
-			.withUser("admin").password("password").roles("USER", "ADMIN");
+			.withUser("user").password(config.getUserPassword()).roles("USER").and()
+			.withUser("admin").password(config.getAdminPassword()).roles("USER", "ADMIN");
 	}
 	
 	@Override

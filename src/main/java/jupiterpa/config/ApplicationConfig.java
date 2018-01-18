@@ -9,6 +9,8 @@ public class ApplicationConfig {
 	private String name;
 	private String description;
 	private String version;
+	private String userPassword;
+	private String adminPassword;
 
 	public String getName() {
 		return name;
@@ -32,6 +34,22 @@ public class ApplicationConfig {
 
 	public void setVersion(String version) {
 		this.version = version;
+	}
+
+	public String getUserPassword() {
+		return userPassword;
+	}
+
+	public void setUserPassword(String userPassword) {
+		this.userPassword = userPassword;
+	}
+
+	public String getAdminPassword() {
+		return adminPassword;
+	}
+
+	public void setAdminPassword(String adminPassword) {
+		this.adminPassword = adminPassword;
 	}
 	
 	

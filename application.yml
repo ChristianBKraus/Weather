@@ -3,13 +3,19 @@
 application:
     name: WeatherController
     description: Weather Controller for Planer
-    version: 1.0.0                
+    version: 1.0.0  
+    userPassword: password
+    adminPassword: password          
+
+clients:
+    - name: ledStrip
+      host: localhost
+      port: 9999
 
 server:
     port: 9989
 management:
     port: 8989
-
 
 endpoints:
     sensitive: false

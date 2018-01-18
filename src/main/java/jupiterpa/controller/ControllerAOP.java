@@ -10,6 +10,9 @@ import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
 import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
 
 @Aspect
@@ -25,6 +28,9 @@ public class ControllerAOP
 
         MDC.put("endpoint", Controller.PATH );
         logger.info(TECHNICAL, " Service {} ({})", joinPoint.getSignature().toString(),  Arrays.toString(joinPoint.getArgs()));
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = (User) auth.getPrincipal();
+        logger.info(TECHNICAL, " User {} ({})", user.getUsername(), user.getPassword());
 
 		try {
 			Object result = joinPoint.proceed();
