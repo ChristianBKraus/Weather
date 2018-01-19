@@ -7,15 +7,15 @@ application:
     userPassword: password
     adminPassword: password          
 
-clients:
-    - name: ledStrip
-      host: localhost
-      port: 9999
-
 server:
     port: 9989
 management:
     port: 8989
+
+clients:
+    - name: ledStrip
+      host: localhost
+      port: 9000
 
 endpoints:
     sensitive: false
