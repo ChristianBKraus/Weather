@@ -28,10 +28,13 @@ public class ControllerAOP
 
         MDC.put("endpoint", Controller.PATH );
         logger.info(TECHNICAL, " Service {} ({})", joinPoint.getSignature().toString(),  Arrays.toString(joinPoint.getArgs()));
+        
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        User user = (User) auth.getPrincipal();
-        logger.info(TECHNICAL, " User {} ({})", user.getUsername(), user.getPassword());
-
+        if (auth != null) {
+        	User user = (User) auth.getPrincipal();
+        	logger.info(TECHNICAL, " User {} ({})", user.getUsername(), user.getPassword());
+        }
+        
 		try {
 			Object result = joinPoint.proceed();
 			if (result != null) {
