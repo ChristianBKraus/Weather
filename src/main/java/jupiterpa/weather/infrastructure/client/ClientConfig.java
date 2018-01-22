@@ -1,4 +1,4 @@
-package jupiterpa.weather.infrastructure.config;
+package jupiterpa.weather.infrastructure.client;
 
 import java.util.List;
 
