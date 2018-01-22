@@ -65,8 +65,8 @@ public class IntegrationTest {
     	list.add(forecast);
     	Long current_time = (new Date()).getTime();
     	String current = "{ \"sys\": { " 
-    			+ "\"sunrise\": " + (current_time - 100) + ", " 
-    			+ "\"sunset\": " + (current_time + 100) 
+    			+ "\"sunrise\": " + (current_time - 1000) + ", " 
+    			+ "\"sunset\": " + (current_time + 1000) 
     			+ "} }";
     	list.add(current);
     	
