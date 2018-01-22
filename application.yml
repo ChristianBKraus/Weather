@@ -1,7 +1,7 @@
 # application.yml
 
 application:
-    name: WeatherController
+    name: weather
     description: Weather Controller for Planer
     version: 1.0.0  
     userPassword: password
