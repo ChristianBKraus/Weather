@@ -35,7 +35,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.logout()//.logoutSuccessUrl("/")
 			.and()
 //			.rememberMe().tokenValiditySeconds(2419200).key("Tagesplaner").and()
-			.httpBasic().realmName("weather").and()
+			.httpBasic().realmName(config.getName()).and()
 			.csrf().disable()
 			.authorizeRequests()
 			.antMatchers(HttpMethod.GET, Controller.PATH+"/**").hasRole("USER")
