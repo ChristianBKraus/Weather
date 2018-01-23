@@ -17,13 +17,9 @@ import static org.junit.Assert.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 import jupiterpa.weather.client.ClientMocking;
-import jupiterpa.weather.domain.client.LEDStripClient;
-import jupiterpa.weather.domain.model.Color;
-import jupiterpa.weather.domain.model.Daylight;
-import jupiterpa.weather.domain.model.Led;
-import jupiterpa.weather.domain.model.Location;
-import jupiterpa.weather.domain.model.Weather;
-import jupiterpa.weather.domain.service.LEDStripService;
+import jupiterpa.weather.domain.client.*;
+import jupiterpa.weather.domain.model.*;
+import jupiterpa.weather.domain.service.*;
 import jupiterpa.weather.ext.controller.Controller;
 
 @RunWith(SpringRunner.class)

@@ -23,11 +23,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import jupiterpa.weather.client.ClientMocking;
-import jupiterpa.weather.domain.client.LEDStripClient;
-import jupiterpa.weather.domain.client.WeatherClient;
-import jupiterpa.weather.domain.model.Color;
-import jupiterpa.weather.domain.model.Led;
-import jupiterpa.weather.domain.model.Location;
+import jupiterpa.weather.domain.client.*;
+import jupiterpa.weather.domain.model.*;
 import jupiterpa.weather.ext.controller.Controller;
 
 @RunWith(SpringRunner.class)

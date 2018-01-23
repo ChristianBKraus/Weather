@@ -1,6 +1,7 @@
 package jupiterpa.weather.infrastructure.client;
 
 import java.nio.charset.Charset;
+import java.util.UUID;
 
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.codec.Base64;
@@ -19,6 +20,10 @@ public class HttpContext {
 	}
 	public static String getCorrelationID() {
 		return id.get();
+	}
+	public static void determineCorrelationID(String prefix) {
+		String corrID = prefix + " - " + UUID.randomUUID();
+		setCorrelationID(corrID);
 	}
 	public static String getAuthentication() {
 		String userName = user.get().getUsername();

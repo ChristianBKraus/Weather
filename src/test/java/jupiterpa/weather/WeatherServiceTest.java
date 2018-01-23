@@ -42,7 +42,7 @@ public class WeatherServiceTest {
     @Test
     public void getDefaultWeather() throws Exception {
     	service.update(false);
-    	mockMvc.perform(get(PATH)) //.with(httpBasic("user","password")))
+    	mockMvc.perform(get(PATH)) 
         .andExpect(status().isOk())
         .andExpect(content().contentType(APPLICATION_JSON_UTF8))
         .andExpect(jsonPath("$.minTemperature").value(3.91))

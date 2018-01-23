@@ -49,6 +49,8 @@ public class ControllerFilter {
 			String id = request.getHeader(HttpContext.CORRELATION_ID);
 			if (id == "" || id == null) {
 				id = request.getRequestURI();
+				HttpContext.determineCorrelationID(id);
+				id = HttpContext.getCorrelationID();
 			}
 			MDC.put(HttpContext.CORRELATION_ID, id );
 			HttpContext.setCorrelationID(id);
