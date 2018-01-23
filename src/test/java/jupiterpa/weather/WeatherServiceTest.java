@@ -22,7 +22,7 @@ import jupiterpa.weather.client.ClientMocking;
 import jupiterpa.weather.domain.client.WeatherClient;
 import jupiterpa.weather.domain.model.Weather;
 import jupiterpa.weather.domain.service.WeatherServiceImpl;
-import jupiterpa.weather.intf.controller.Controller;
+import jupiterpa.weather.ext.controller.Controller;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest

@@ -24,7 +24,7 @@ import jupiterpa.weather.domain.model.Led;
 import jupiterpa.weather.domain.model.Location;
 import jupiterpa.weather.domain.model.Weather;
 import jupiterpa.weather.domain.service.LEDStripService;
-import jupiterpa.weather.intf.controller.Controller;
+import jupiterpa.weather.ext.controller.Controller;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest

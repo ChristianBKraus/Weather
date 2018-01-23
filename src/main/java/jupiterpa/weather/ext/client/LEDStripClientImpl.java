@@ -1,4 +1,4 @@
-package jupiterpa.weather.intf.client;
+package jupiterpa.weather.ext.client;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
