@@ -1,4 +1,4 @@
-package jupiterpa.weather.infrastructure.aop;
+package jupiterpa.weather.infrastructure.controller;
 
 import java.util.Arrays;
 
@@ -14,6 +14,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
+
+import jupiterpa.weather.infrastructure.client.HttpContext;
 
 @Aspect
 @Component
@@ -31,8 +33,11 @@ public class ControllerAOP
         
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth != null) {
-        	User user = (User) auth.getPrincipal();
+        	User user = (User) auth.getPrincipal(); 
         	logger.info(TECHNICAL, " User {} ({})", user.getUsername(), user.getPassword());
+        	
+        	HttpContext.setUser(user);
+        	MDC.put("user", user.getUsername());
         }
         
 		try {

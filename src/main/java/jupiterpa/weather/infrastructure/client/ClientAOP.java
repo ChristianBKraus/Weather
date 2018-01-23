@@ -1,4 +1,4 @@
-package jupiterpa.weather.infrastructure.aop;
+package jupiterpa.weather.infrastructure.client;
 
 import java.util.Arrays;
 

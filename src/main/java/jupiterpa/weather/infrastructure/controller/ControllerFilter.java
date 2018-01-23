@@ -1,4 +1,4 @@
-package jupiterpa.weather.infrastructure.aop;
+package jupiterpa.weather.infrastructure.controller;
 
 import java.io.IOException;
 
@@ -18,14 +18,16 @@ import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import jupiterpa.weather.infrastructure.client.HttpContext;
+
 @Configuration
-public class Filter {
+public class ControllerFilter {
 	@Bean
 	public FilterRegistrationBean registerFilter() {
 		FilterRegistrationBean reg = new FilterRegistrationBean();
 		reg.setFilter(someFilter());
 		reg.addUrlPatterns("*");
-		reg.addInitParameter(CorrelationID.CORRELATION_ID, "Anonymous");
+		reg.addInitParameter(HttpContext.CORRELATION_ID, "Anonymous");
 		reg.setName("CorrelationFilter");
 		reg.setOrder(1);
 		return reg;
@@ -44,12 +46,12 @@ public class Filter {
 				throws IOException, ServletException {
 			HttpServletRequest request = (HttpServletRequest) req; 
 
-			String id = request.getHeader(CorrelationID.CORRELATION_ID);
+			String id = request.getHeader(HttpContext.CORRELATION_ID);
 			if (id == "" || id == null) {
 				id = request.getRequestURI();
 			}
-			MDC.put(CorrelationID.CORRELATION_ID, id );
-			CorrelationID.set(id);
+			MDC.put(HttpContext.CORRELATION_ID, id );
+			HttpContext.setCorrelationID(id);
 			logger.info(TECHNICAL,"Correlation ID: {}", id);
 			
 			chain.doFilter(request, res);
