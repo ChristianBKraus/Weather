@@ -9,14 +9,11 @@ import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 
-import jupiterpa.weather.domain.model.Daylight;
-import jupiterpa.weather.domain.model.Weather;
-import jupiterpa.weather.infrastructure.actuator.HealthInfo;
+import jupiterpa.weather.domain.model.*;
 
 public class OpenWeatherMapAdapter {
     private static final Marker TECHNICAL = MarkerFactory.getMarker("TECHNICAL");

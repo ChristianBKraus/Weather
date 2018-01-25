@@ -15,27 +15,10 @@ import jupiterpa.weather.domain.model.Daylight;
 import jupiterpa.weather.domain.model.Weather;
 import jupiterpa.weather.domain.service.OpenWeatherMapAdapter;
 
-//import jupiterpa.weather.client.ClientMocking;
-//import jupiterpa.weather.domain.client.WeatherClient;
-//import jupiterpa.weather.domain.model.Weather;
-//import jupiterpa.weather.domain.service.OpenWeatherMapAdapter;
-//import jupiterpa.weather.domain.service.WeatherServiceImpl;
-//import jupiterpa.weather.ext.controller.Controller;
-
 @RunWith(SpringRunner.class)
 @SpringBootTest
-//@AutoConfigureMockMvc
-//@WithMockUser(roles="USER")
 @ActiveProfiles({"mock","test"})
 public class OpenWeatherMapAdapterTest { 
-//	final String PATH = Controller.PATH; 
-
-//	@Autowired
-//    private MockMvc mockMvc;
-//	@Autowired
-//	private WeatherClient client;
-//	@Autowired
-//	private WeatherServiceImpl service;
 	
 	private String default_forecast = 
 			"{ \"list\": [ "

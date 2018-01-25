@@ -1,4 +1,4 @@
-package jupiterpa.weather.domain.service;
+package jupiterpa.weather.ext.scheduler;
 
 import java.util.ArrayList;
 import org.slf4j.Logger;
@@ -13,6 +13,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
 
+import jupiterpa.weather.domain.service.WeatherService;
 import jupiterpa.weather.infrastructure.client.HttpContext;
 import jupiterpa.weather.infrastructure.config.ApplicationConfig;
 
