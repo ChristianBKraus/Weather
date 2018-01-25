@@ -1,6 +1,6 @@
 package jupiterpa.weather.domain.model;
 
-public class Led {
+public class LED {
 	
 	int row;
 	int column;		
@@ -8,9 +8,9 @@ public class Led {
 	int green = 0;
 	int blue = 0;
 
-	public Led() {}
+	public LED() {}
 	
-	public Led(Location loc, Color color) {
+	public LED(LEDLocation loc, LEDColor color) {
 		this.row = loc.getRow();
 		this.column = loc.getColumn();
 		this.red = color.getRed();
@@ -23,12 +23,12 @@ public class Led {
 		return "LED " + row + "/" + column + ": " + red + "/" + green + "/" + blue;
 	}
 	
-	public Location getLocation() {
-		return new Location(row,column);
+	public LEDLocation getLocation() {
+		return new LEDLocation(row,column);
 	}
 	
-	public Color getColor() {
-		return new Color(red,green,blue);
+	public LEDColor getColor() {
+		return new LEDColor(red,green,blue);
 	}
 
 	public int getRow() {

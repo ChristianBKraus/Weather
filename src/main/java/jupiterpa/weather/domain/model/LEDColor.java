@@ -1,19 +1,19 @@
 package jupiterpa.weather.domain.model;
 
-public class Color {
-	public static final Color Black = new Color(0,0,0);
-	public static final Color White = new Color(255,255,255);
-	public static final Color Red = new Color(255,0,0);
-	public static final Color Green = new Color(0,255,0);
-	public static final Color Blue = new Color(0,0,255);
-	public static final Color Yellow = new Color(0,255,255);
+public class LEDColor {
+	public static final LEDColor Black = new LEDColor(0,0,0);
+	public static final LEDColor White = new LEDColor(255,255,255);
+	public static final LEDColor Red = new LEDColor(255,0,0);
+	public static final LEDColor Green = new LEDColor(0,255,0);
+	public static final LEDColor Blue = new LEDColor(0,0,255);
+	public static final LEDColor Yellow = new LEDColor(0,255,255);
 
 	
 	int red;
 	int green;
 	int blue;
 	
-	public Color(int red, int green, int blue) {
+	public LEDColor(int red, int green, int blue) {
 		this.red = red;
 		this.green = green;
 		this.blue = blue;

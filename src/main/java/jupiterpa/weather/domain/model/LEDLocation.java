@@ -1,10 +1,10 @@
 package jupiterpa.weather.domain.model;
 
-public class Location {
+public class LEDLocation {
 	int row;
 	int column;
 
-	public Location(int row, int column) {
+	public LEDLocation(int row, int column) {
 		this.row = row;
 		this.column = column;
 	}

@@ -69,27 +69,27 @@ public class IntegrationTest {
     	
         ClientMocking mock = (ClientMocking) weather;
         mock.inject(list);
-        test.inject(new ArrayList<Led>());
+        test.inject(new ArrayList<LED>());
 
     	mockMvc.perform( put(PATH + "/update").content("").contentType(APPLICATION_JSON_UTF8) )
         .andExpect(status().isOk());
     	
     	
     	@SuppressWarnings("unchecked")
-		List<Led> leds = (List<Led>) test.getState();
+		List<LED> leds = (List<LED>) test.getState();
     	
     	assertThat(leds, hasSize(7) );
-    	for(Led led: leds) {
+    	for(LED led: leds) {
     		System.out.println(led);
     		System.out.println(led.getLocation().toString());
     		switch (led.getLocation().toString()) {
-    			case "0/0":  assertEquals(Color.Yellow.toString(), led.getColor().toString()); break;
-    			case "0/2":  assertEquals(Color.Black.toString(), led.getColor().toString()); break;
-    			case "0/1":  assertEquals(Color.Black.toString(), led.getColor().toString()); break;
-    			case "1/1":  assertEquals(Color.Black.toString(), led.getColor().toString()); break;
-    			case "2/1":  assertEquals(Color.Black.toString(), led.getColor().toString()); break;
-    			case "3/1":  assertEquals(new Color(25,0,229).toString(), led.getColor().toString()); break;
-    			case "4/1":  assertEquals(Color.Red.toString(), led.getColor().toString()); break;
+    			case "0/0":  assertEquals(LEDColor.Yellow.toString(), led.getColor().toString()); break;
+    			case "0/2":  assertEquals(LEDColor.Black.toString(), led.getColor().toString()); break;
+    			case "0/1":  assertEquals(LEDColor.Black.toString(), led.getColor().toString()); break;
+    			case "1/1":  assertEquals(LEDColor.Black.toString(), led.getColor().toString()); break;
+    			case "2/1":  assertEquals(LEDColor.Black.toString(), led.getColor().toString()); break;
+    			case "3/1":  assertEquals(new LEDColor(25,0,229).toString(), led.getColor().toString()); break;
+    			case "4/1":  assertEquals(LEDColor.Red.toString(), led.getColor().toString()); break;
     			default: assertEquals(0,1);
     		}
     	}

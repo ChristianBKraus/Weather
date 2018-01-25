@@ -9,26 +9,26 @@ import org.springframework.stereotype.Component;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 
 import jupiterpa.weather.domain.client.LEDStripClient;
-import jupiterpa.weather.domain.model.Led;
+import jupiterpa.weather.domain.model.*;
 import jupiterpa.weather.infrastructure.client.ClientBase;
 
 @Component
 @Profile("default")
-public class LEDStripClientImpl extends ClientBase<Led> implements LEDStripClient {
+public class LEDStripClientImpl extends ClientBase<LED> implements LEDStripClient {
     private static final Marker TECHNICAL = MarkerFactory.getMarker("TECHNICAL");
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@HystrixCommand(fallbackMethod = "defaultSet")
-	public void set(Led led) {
+	public void set(LED led) {
 		put("ledStrip","/ledstrip",led);
 	}
 	
-	public void defaultSet(Led led) {
+	public void defaultSet(LED led) {
 		logger.warn(TECHNICAL, "SET LEDStrip failed");
 	}
 	
-	public Led getLed(int row, int column) {
-		return get("ledStrip","/ledstrip/"+row+"/"+column,Led.class);
+	public LED getLed(int row, int column) {
+		return get("ledStrip","/ledstrip/"+row+"/"+column,LED.class);
 	}
 
 }

@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import jupiterpa.weather.domain.client.*;
 import jupiterpa.weather.domain.model.*;
 
+import jupiterpa.weather.infrastructure.actuator.*;
+
 @Service
 public class WeatherService {
 
@@ -15,28 +17,24 @@ public class WeatherService {
 	WeatherClient weatherClient;
 	@Autowired
 	LEDStripClient ledstripClient;
+	@Autowired 
+	InterfaceHealth health;
 
 	public boolean updateWeather() {
-		
-//		String result = client.getForecast();
-//		if (result == "") {
-//			// keep old value [potentiall dummy ones]
-//			health.setHealth(new HealthInfo("forecastWeather",true,"not available"));
-//			return;
-//		}
-//		health.setHealth(new HealthInfo("forecastWeather",false,"available"));
 		
 		String forecast = weatherClient.getForecast();
 		if (forecast != "") {
 			Weather weather = OpenWeatherMapAdapter.getWeather(forecast);
 
-			Collection<Led> leds = Transformer.transformWeather(weather);
-			for (Led led : leds) {
+			Collection<LED> leds = LEDTransformer.transformWeather(weather);
+			for (LED led : leds) {
 				ledstripClient.set(led);
 			}
 
+			health.setHealth(new HealthInfo("Weather",true,"not available"));
 			return true;
 		} else {
+			health.setHealth(new HealthInfo("Weather",false,"available"));
 			return false;
 		}
 	}
@@ -46,13 +44,15 @@ public class WeatherService {
 		String currentWeather = weatherClient.getCurrentWeather();
 		if (currentWeather != "") {
 			Daylight daylight = OpenWeatherMapAdapter.getDaylight(currentWeather);
-			Collection<Led> leds = Transformer.transformDaylight(daylight);
-			for (Led led : leds) {
+			Collection<LED> leds = LEDTransformer.transformDaylight(daylight);
+			for (LED led : leds) {
 				ledstripClient.set(led);
 			}
 
+			health.setHealth(new HealthInfo("Daylight",true,"not available"));
 			return true;
 		} else {
+			health.setHealth(new HealthInfo("Daylight",false,"available"));
 			return false;
 		}
 	}

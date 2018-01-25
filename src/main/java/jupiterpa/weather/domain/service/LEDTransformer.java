@@ -11,73 +11,73 @@ import org.slf4j.MarkerFactory;
 
 import jupiterpa.weather.domain.model.*;
 
-public class Transformer {
+public class LEDTransformer {
     private static final Marker TECHNICAL = MarkerFactory.getMarker("TECHNICAL");
-	private static final Logger logger = LoggerFactory.getLogger(new Transformer().getClass());
+	private static final Logger logger = LoggerFactory.getLogger(new LEDTransformer().getClass());
 	
-	public static Collection<Led> transformWeather(Weather weather) {
-		Collection<Led> leds = new ArrayList<Led>();
+	public static Collection<LED> transformWeather(Weather weather) {
+		Collection<LED> leds = new ArrayList<LED>();
 		
 		Double max = weather.getMaxTemperature();
 		Boolean r = weather.isRaining();
 		
 		// Temperature
 		logger.info(TECHNICAL," Update Temperature 0-10 ({})",max);
-		leds.add(new Led(new Location(4,1), getColor(max)));
+		leds.add(new LED(new LEDLocation(4,1), getColor(max)));
 
 		logger.info(TECHNICAL," Update Temperature 10-20 ({})",max);
-		leds.add(new Led(new Location(3,1), getColor(max-10.0)));
+		leds.add(new LED(new LEDLocation(3,1), getColor(max-10.0)));
 
 		logger.info(TECHNICAL," Update Temperature 20-30 ({})",max);
-		leds.add(new Led(new Location(2,1), getColor(max-20.0)));
+		leds.add(new LED(new LEDLocation(2,1), getColor(max-20.0)));
 
 		logger.info(TECHNICAL," Update Temperature 30-40 ({})",max);
-		leds.add(new Led(new Location(1,1), getColor(max-30.0)));
+		leds.add(new LED(new LEDLocation(1,1), getColor(max-30.0)));
 		
 		// Rain
 		logger.info(TECHNICAL," Update Raining ({})", r);
 		if (r)
-			leds.add(new Led(new Location(0,1), Color.Yellow));
+			leds.add(new LED(new LEDLocation(0,1), LEDColor.Yellow));
 		else
-			leds.add(new Led(new Location(0,1), Color.Black));
+			leds.add(new LED(new LEDLocation(0,1), LEDColor.Black));
 
 		return leds;
 	}
-	public static Collection<Led> transformDaylight(Daylight daylight) {
-		Collection<Led> leds = new ArrayList<Led>();
+	public static Collection<LED> transformDaylight(Daylight daylight) {
+		Collection<LED> leds = new ArrayList<LED>();
 		
 		Long sunrise = daylight.getSunrise();
 		Long sunset  = daylight.getSunset();
 		Long current = (new Date()).getTime();
-		Location loc;
+		LEDLocation loc;
 		
 		logger.info(TECHNICAL," Update Sun");
-		loc = new Location(0,0);
+		loc = new LEDLocation(0,0);
 		if ( current > sunrise && current < sunset ) {
-			leds.add(new Led(loc,Color.Yellow));
+			leds.add(new LED(loc,LEDColor.Yellow));
 		} else {
-			leds.add(new Led(loc,Color.Black));
+			leds.add(new LED(loc,LEDColor.Black));
 		}
 
 		logger.info(TECHNICAL," Update Moon");
-		loc = new Location(0,2);
+		loc = new LEDLocation(0,2);
 		if ( current <= sunrise || current >= sunset ) {
-			leds.add(new Led(loc,Color.Yellow));
+			leds.add(new LED(loc,LEDColor.Yellow));
 		} else {
-			leds.add(new Led(loc,Color.Black));
+			leds.add(new LED(loc,LEDColor.Black));
 		}
 		
 		return leds;
 	}
 	
 	
-	private static Color getColor(Double temp) {
+	private static LEDColor getColor(Double temp) {
 		if (temp < 0.0) {
-			return Color.Black;
+			return LEDColor.Black;
 		}
 		if (temp > 10.0) {
-			return Color.Red;
+			return LEDColor.Red;
 		}
-		return new Color((int) (((double)temp / 10.0) * 255), 0, (int) ( ((10.0 - (double)temp ) / 10.0) * 255 ));
+		return new LEDColor((int) (((double)temp / 10.0) * 255), 0, (int) ( ((10.0 - (double)temp ) / 10.0) * 255 ));
 	}	
 }

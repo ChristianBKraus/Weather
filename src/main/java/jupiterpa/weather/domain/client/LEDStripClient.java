@@ -1,8 +1,8 @@
 package jupiterpa.weather.domain.client;
 
-import jupiterpa.weather.domain.model.Led;
+import jupiterpa.weather.domain.model.LED;
 
 public interface LEDStripClient {
-	public void set(Led led);
-	public void defaultSet(Led led);
+	public void set(LED led);
+	public void defaultSet(LED led);
 }
