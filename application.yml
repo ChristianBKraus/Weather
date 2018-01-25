@@ -24,3 +24,18 @@ endpoints:
         sensitive: false
 management.security.enabled: false 
     
+spring:
+    data:
+        mongodb:
+            host: 127.0.0.1
+            port: 27017
+            database: weather
+    
+---    
+spring:
+    profiles: test
+    data:
+        mongodb:
+            host: 127.0.0.1
+            port: 27017
+            database: weather_test    
