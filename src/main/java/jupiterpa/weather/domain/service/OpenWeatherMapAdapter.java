@@ -9,6 +9,7 @@ import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
@@ -23,6 +24,9 @@ public class OpenWeatherMapAdapter {
 	
 	public static Weather getWeather(String forecast) {
 		Weather weather = new Weather(-300.0,-300.0,false);
+		if (forecast == "") {
+			return weather;
+		}
 
 		int number = 0;
 		double min_temp = 0.0;
@@ -31,19 +35,11 @@ public class OpenWeatherMapAdapter {
 		int today = 0;
 		
 		logger.info(TECHNICAL,"Initialize Forecast Weather");
-
-//		String result = client.getForecast();
-//		if (result == "") {
-//			// keep old value [potentiall dummy ones]
-//			health.setHealth(new HealthInfo("forecastWeather",true,"not available"));
-//			return;
-//		}
-//		health.setHealth(new HealthInfo("forecastWeather",false,"available"));
 		
 		try {		
 		    // Extract info
 		    ObjectMapper mapper = new ObjectMapper();
-			    JsonNode root = mapper.readTree(forecast);
+			JsonNode root = mapper.readTree(forecast);
 			ArrayNode list = (ArrayNode) root.path("list");
 			Iterator<JsonNode> it = list.elements();
 			while (it.hasNext()) {

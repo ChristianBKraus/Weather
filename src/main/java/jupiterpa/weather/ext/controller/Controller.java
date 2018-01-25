@@ -17,10 +17,9 @@ import jupiterpa.weather.domain.service.*;
 public class Controller {
     public static final String PATH ="/weather";
     
-    @Autowired
-    WeatherService weatherService;
-    @Autowired
-    LEDStripService ledStripService;
+    @Autowired WeatherRepo weatherRepo;
+    @Autowired DaylightRepo daylightRepo;
+    @Autowired WeatherService service;
     
     @GetMapping("")
     @ApiOperation(value = "View todays Weather", response = Weather.class)
@@ -28,7 +27,7 @@ public class Controller {
         @ApiResponse(code = 200, message = "Successfully retrieved Weather")
     })
     public Weather get() {  
-    	return weatherService.getWeather();
+    	return weatherRepo.findAll().get(0);
     }
     
     @GetMapping("/daylight")
@@ -37,7 +36,7 @@ public class Controller {
         @ApiResponse(code = 200, message = "Successfully retrieved Daylight Hours")
     })
     public Daylight getdaylight() {  
-    	return weatherService.getDaylight();
+    	return daylightRepo.findAll().get(0);
     }
     
     @PutMapping("/update")
@@ -46,8 +45,8 @@ public class Controller {
         @ApiResponse(code = 200, message = "Updated Successfully")
     })
     public void update() {
-    	weatherService.update(false);
-    	ledStripService.update(weatherService.getWeather(), weatherService.getDaylight());
+    	service.updateWeather();
+    	service.updateDaylight();
     }
 
 }

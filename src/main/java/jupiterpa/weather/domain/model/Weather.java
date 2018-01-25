@@ -1,7 +1,11 @@
 package jupiterpa.weather.domain.model;
 
+import org.springframework.data.annotation.Id;
+
 public class Weather {
 	
+	@Id
+	public String id;
 	Double minTemperature;
 	Double maxTemperature;
 	boolean raining;

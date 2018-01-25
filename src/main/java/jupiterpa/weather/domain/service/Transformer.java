@@ -11,9 +11,9 @@ import org.slf4j.MarkerFactory;
 
 import jupiterpa.weather.domain.model.*;
 
-public class WeatherTransformer {
+public class Transformer {
     private static final Marker TECHNICAL = MarkerFactory.getMarker("TECHNICAL");
-	private static final Logger logger = LoggerFactory.getLogger(new WeatherTransformer().getClass());
+	private static final Logger logger = LoggerFactory.getLogger(new Transformer().getClass());
 	
 	public static Collection<Led> transformWeather(Weather weather) {
 		Collection<Led> leds = new ArrayList<Led>();

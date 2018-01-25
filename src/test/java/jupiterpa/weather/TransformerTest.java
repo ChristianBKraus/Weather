@@ -19,7 +19,7 @@ import jupiterpa.weather.domain.service.*;
 @SpringBootTest
 //@AutoConfigureMockMvc
 @ActiveProfiles({"mock","test"})
-public class LEDStripServiceTest { 
+public class TransformerTest { 
 //	final String PATH = Controller.PATH; 
 
 //	@Autowired

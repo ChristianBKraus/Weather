@@ -2,7 +2,13 @@ package jupiterpa.weather.domain.model;
 
 import java.util.Date;
 
+import org.springframework.data.annotation.Id;
+
 public class Daylight {
+	
+	@Id
+	public Long id;
+	
 	Long sunset;
 	Long sunrise;
 	

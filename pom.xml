@@ -34,6 +34,12 @@
             <scope>test</scope>
         </dependency>
         
+		<!-- Spring Boot Starter - MONGO DB -->
+		<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-mongodb</artifactId>
+        </dependency>
+		        
         <!-- Spring Boot Starter - Hystrix -->
         <dependency>
 			<groupId>org.springframework.cloud</groupId>
