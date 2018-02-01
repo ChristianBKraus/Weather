@@ -14,8 +14,8 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
 
 import jupiterpa.weather.domain.service.WeatherService;
-import jupiterpa.weather.infrastructure.client.HttpContext;
-import jupiterpa.weather.infrastructure.config.ApplicationConfig;
+import jupiterpa.infrastructure.client.HttpContext;
+import jupiterpa.infrastructure.config.ApplicationConfig;
 
 @Component
 @Profile("default")

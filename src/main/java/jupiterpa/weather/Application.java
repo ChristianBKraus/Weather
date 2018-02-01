@@ -11,11 +11,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
-import jupiterpa.weather.infrastructure.config.ApplicationConfig;
+import jupiterpa.infrastructure.config.ApplicationConfig;
 
 @EnableCircuitBreaker
 @EnableScheduling
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages="jupiterpa")
 public class Application implements CommandLineRunner {
 	
     private static final Marker TECHNICAL = MarkerFactory.getMarker("TECHNICAL");

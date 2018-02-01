@@ -11,9 +11,10 @@ public class Weather {
 	boolean raining;
 	
 	public Weather() {
-		
+		id = "current";
 	}
 	public Weather(Double temp_min, Double temp_max, boolean raining) {
+		id = "current";
 		this.minTemperature = temp_min;
 		this.maxTemperature = temp_max;
 		this.raining = raining;

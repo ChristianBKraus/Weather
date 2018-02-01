@@ -7,12 +7,17 @@ import org.springframework.data.annotation.Id;
 public class Daylight {
 	
 	@Id
-	public Long id;
+	public String id;
 	
 	Long sunset;
 	Long sunrise;
 	
+	public Daylight() {
+		id = "current";
+	}
+	
 	public Daylight(Long sunrise, Long sunset) {
+		id = "current";
 		this.sunset = sunset;
 		this.sunrise = sunrise;
 	}

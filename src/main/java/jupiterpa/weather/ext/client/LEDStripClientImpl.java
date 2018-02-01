@@ -10,7 +10,7 @@ import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 
 import jupiterpa.weather.domain.client.LEDStripClient;
 import jupiterpa.weather.domain.model.*;
-import jupiterpa.weather.infrastructure.client.ClientBase;
+import jupiterpa.infrastructure.client.ClientBase;
 
 @Component
 @Profile("default")

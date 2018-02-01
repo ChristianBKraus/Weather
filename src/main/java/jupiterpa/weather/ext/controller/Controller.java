@@ -1,5 +1,7 @@
 package jupiterpa.weather.ext.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -27,7 +29,11 @@ public class Controller {
         @ApiResponse(code = 200, message = "Successfully retrieved Weather")
     })
     public Weather get() {  
-    	return weatherRepo.findAll().get(0);
+    	List<Weather> list = weatherRepo.findAll();
+    	if (list.size() > 0)
+    		return list.get(0);
+    	else
+    		return null;
     }
     
     @GetMapping("/daylight")
@@ -36,7 +42,11 @@ public class Controller {
         @ApiResponse(code = 200, message = "Successfully retrieved Daylight Hours")
     })
     public Daylight getdaylight() {  
-    	return daylightRepo.findAll().get(0);
+    	List<Daylight> list = daylightRepo.findAll();
+    	if (list.size() > 0)
+    		return list.get(0);
+    	else 
+    		return null;
     }
     
     @PutMapping("/update")
