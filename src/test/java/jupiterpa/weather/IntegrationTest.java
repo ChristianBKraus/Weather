@@ -80,8 +80,6 @@ public class IntegrationTest {
     	
     	assertThat(leds, hasSize(7) );
     	for(LED led: leds) {
-    		System.out.println(led);
-    		System.out.println(led.getLocation().toString());
     		switch (led.getLocation().toString()) {
     			case "0/0":  assertEquals(LEDColor.Yellow.toString(), led.getColor().toString()); break;
     			case "0/2":  assertEquals(LEDColor.Black.toString(), led.getColor().toString()); break;
